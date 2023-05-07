@@ -21,7 +21,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #df = pd.read_csv(adress, engine='python')
 
-df = get_data(r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Documents\Streamlit\Dashboard\data\Portfolio_dataset_0423.csv')
+df = get_data(r'data\Portfolio_dataset_0423.csv')
 
 
 #---- SIDEBAR -----
