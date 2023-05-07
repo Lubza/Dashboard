@@ -141,7 +141,7 @@ fig_industry = px.pie(
         
 )
 
-st.plotly_chart(fig_industry)
+col1.plotly_chart(fig_industry)
 
 #Unrealized gain/loss by sector
 
@@ -161,4 +161,4 @@ fig_industry_unrlzd = px.bar(
         template="plotly_white"
 )
 
-st.plotly_chart(fig_industry_unrlzd)
+col2.plotly_chart(fig_industry_unrlzd)
