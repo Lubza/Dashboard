@@ -98,7 +98,7 @@ st.markdown("---")
 #st.dataframe(df_selection)
 #st.dataframe(df)
 
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 # Expected Dividend by month
 
@@ -141,7 +141,7 @@ fig_industry = px.pie(
         
 )
 
-col1.plotly_chart(fig_industry)
+col3.plotly_chart(fig_industry)
 
 #Unrealized gain/loss by sector
 
