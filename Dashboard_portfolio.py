@@ -2,11 +2,11 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-@st.cache
-def get_data(filename):
-    df = pd.read_csv(filename)
+#@st.cache
+#def get_data():
+    #df = pd.read_csv(r'data\Portfolio_dataset_0423.csv)
 
-    return df
+    #return df
 
 #emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 
@@ -17,11 +17,11 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-#adress = r'data/Portfolio_dataset_1122.csv'
+adress = r'data/Portfolio_dataset_0423.csv'
 
-#df = pd.read_csv(adress, engine='python')
+df = pd.read_csv(adress, engine='python')
 
-df = get_data(r'data\Portfolio_dataset_0423.csv')
+#df = get_data()
 
 
 #---- SIDEBAR -----
