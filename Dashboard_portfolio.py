@@ -162,3 +162,24 @@ fig_industry_unrlzd = px.bar(
 )
 
 col2.plotly_chart(fig_industry_unrlzd)
+
+#PnL By ticker
+
+PnL_by_ticker = (
+
+df_selection.groupby(by=["Financial Instrument"]).sum()[["Unrealized P&L"]].sort_values(by="Unrealized P&L")
+
+)
+
+fig_PnL_by_ticker = px.bar(
+        PnL_by_ticker,
+        y = 'Unrealized P&L',
+        x = PnL_by_ticker.index,
+        orientation='v',
+        title='<b>PnL by ticker</b>',
+        color_discrete_sequence=['#b76500'] * len(PnL_by_ticker),
+        template='plotly_white'
+)
+
+col3.plotly_chart(fig_PnL_by_ticker)
+
