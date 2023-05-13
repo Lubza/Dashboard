@@ -17,7 +17,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0423.csv'
+adress = r'data/Portfolio_dataset_0423_new.csv'
 
 df = pd.read_csv(adress, engine='python')
 
@@ -142,6 +142,26 @@ fig_industry = px.pie(
 )
 
 col3.plotly_chart(fig_industry)
+
+#PnL By ticker
+
+PnL_by_ticker_pct = (
+
+df_selection.groupby(by=["Financial Instrument"]).sum()[["Unrealized PnL"]].sort_values(by="Unrealized PnL")
+
+)
+
+fig_PnL_by_ticker_pct = px.bar(
+        PnL_by_ticker_pct,
+        y = 'Unrealized PnL',
+        x = PnL_by_ticker_pct.index,
+        orientation='v',
+        title='<b>Unrealized PnL by ticker</b>',
+        color_discrete_sequence=['#00b7b7'] * len(PnL_by_ticker_pct),
+        template='plotly_white'
+)
+
+col1.plotly_chart(fig_PnL_by_ticker_pct)
 
 #Unrealized gain/loss by sector
 
