@@ -59,7 +59,7 @@ ccy = st.sidebar.multiselect(
 )
 
 df_selection = df.query(
-    "Position_Size == @PSize & Sector == @sector & Industry == @industry"
+    "Position_Size == @PSize & Sector == @sector & Industry == @industry & CCY == @ccy"
 )
 
 
