@@ -23,6 +23,24 @@ df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
+adress_log = r'Activity logs/Activity log 05092023_adj_date.csv'
+
+df_log = pd.read_csv(adress_log, engine='python')
+
+del df_log['Unnamed: 7']
+del df_log['Unnamed: 8']
+
+df_log['Price adj'] = df_log["Price"].str.replace("$","")
+df_log['Price adj'] = df_log['Price adj'].astype(float)
+df_log['Amount'] = df_log['Price adj'] * df_log['Qty']
+
+df_log['Date adj'] = pd.to_datetime(df_log['Date'])
+
+df_log['Year'] = df_log['Date adj'].dt.year 
+df_log['Month'] = df_log['Date adj'].dt.month
+
+del df_log['Date adj']
+
 
 #---- SIDEBAR -----
 st.sidebar.header("Please Filter Here:")
@@ -203,3 +221,9 @@ fig_PnL_by_ticker = px.bar(
 
 col3.plotly_chart(fig_PnL_by_ticker)
 
+st.markdown("---")
+st.title(":bar_chart: Activity log")
+
+#col4= st.columns(1)
+
+st.dataframe(df_log)
