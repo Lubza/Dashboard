@@ -23,7 +23,7 @@ df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 05312023.csv'
+adress_log = r'Activity logs/Activity log 05092023_adj_date.csv'
 
 df_log = pd.read_csv(adress_log, engine='python')
 
