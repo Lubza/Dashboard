@@ -17,7 +17,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0423_new.csv'
+adress = r'data/Portfolio_dataset_0523.csv'
 
 df = pd.read_csv(adress, engine='python')
 
@@ -82,7 +82,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of April 2023")
+st.title(":bar_chart: Portfolio Overview as of May 2023")
 st.markdown('##')
 
 #TOP KPI's
@@ -201,7 +201,7 @@ fig_industry_unrlzd = px.bar(
 
 col2.plotly_chart(fig_industry_unrlzd)
 
-#PnL By ticker
+#PnL By ticker %
 
 PnL_by_ticker = (
 
@@ -214,7 +214,7 @@ fig_PnL_by_ticker = px.bar(
         y = 'Unrealized P&L',
         x = PnL_by_ticker.index,
         orientation='v',
-        title='<b>PnL by ticker</b>',
+        title='<b>PnL by ticker %</b>',
         color_discrete_sequence=['#b76500'] * len(PnL_by_ticker),
         template='plotly_white'
 )
