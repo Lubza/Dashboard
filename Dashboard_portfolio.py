@@ -174,7 +174,7 @@ fig_PnL_by_ticker_pct = px.bar(
         y = 'Unrealized PnL',
         x = PnL_by_ticker_pct.index,
         orientation='v',
-        title='<b>Unrealized PnL by ticker</b>',
+        title='<b>Unrealized PnL by ticker %</b>',
         color_discrete_sequence=['#00b7b7'] * len(PnL_by_ticker_pct),
         template='plotly_white'
 )
@@ -214,7 +214,7 @@ fig_PnL_by_ticker = px.bar(
         y = 'Unrealized P&L',
         x = PnL_by_ticker.index,
         orientation='v',
-        title='<b>PnL by ticker %</b>',
+        title='<b>PnL by ticker</b>',
         color_discrete_sequence=['#b76500'] * len(PnL_by_ticker),
         template='plotly_white'
 )
