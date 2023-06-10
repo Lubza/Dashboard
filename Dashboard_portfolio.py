@@ -1,3 +1,10 @@
+from pandas_datareader import data as pdr
+from datetime import datetime
+import yfinance as yf
+#Data viz
+import plotly.graph_objs as go
+yf.pdr_override()
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -96,6 +103,26 @@ Shares = df['Position']
 Total_div_year = round((Divi * Shares).sum(),2)
 div_yield = round(((Total_div_year/Total_MV) * 100),2)
 
+#Calculating year-to-date price return of SPY
+SPY_YE_2022 = pdr.DataReader('SPY','2022-12-30','2022-12-31')['Adj Close']
+SPY_YE_2022 = SPY_YE_2022.sum()
+
+SPY_mtd_2023 = pdr.DataReader('SPY','2023-05-31','2023-06-01')['Adj Close']
+SPY_mtd_2023 = SPY_mtd_2023.sum()
+
+SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
+
+#Calculating year-to-date price return of VNQ
+VNQ_YE_2022 = pdr.DataReader('VNQ','2022-12-30','2022-12-31')['Adj Close']
+VNQ_YE_2022 = VNQ_YE_2022.sum()
+
+VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-05-31','2023-06-01')['Adj Close']
+VNQ_mtd_2023 = VNQ_mtd_2023.sum()
+
+VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
+
+
+
 left_column, middle_column1, middle_column2, right_column = st.columns(4)
 with left_column:
     st.subheader("Exposure:")
@@ -110,6 +137,22 @@ with right_column:
     st.subheader("Dividend yield:")
     st.subheader(f"{div_yield:,} %      or      {Total_div_year:,} USD")
     
+
+st.markdown("---")
+
+left_column, middle_column1, middle_column2, right_column = st.columns(4)
+with left_column:
+    st.subheader("SPY YTD:")
+    st.subheader(f"{SPY_YTD_return:,} %")
+with middle_column1:
+    st.subheader("VNQ YTD:")
+    st.subheader(f"{VNQ_YTD_return:,} %")
+with middle_column2:
+    st.subheader("Balance:")
+    st.subheader(f"{Account_balance:,} USD ")
+with right_column:
+    st.subheader("Dividend yield:")
+    st.subheader(f"{div_yield:,} %      or      {Total_div_year:,} USD")
 
 st.markdown("---")
 
