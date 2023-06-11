@@ -96,6 +96,7 @@ st.markdown('##')
 Total_net_liq = round(df_selection['% of Net Liq'].sum(), 2)
 Total_MV = round(df_selection['Market Value'].sum(), 1)
 Account_balance = round(((100/Total_net_liq)*Total_MV), 2)
+Total_unrlzd = round(df_selection['Unrealized P&L'].sum(), 2)
 
 #Dividend calculation
 Divi = df['Dividends']
@@ -120,6 +121,9 @@ VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-05-31','2023-06-01')['Adj Close']
 VNQ_mtd_2023 = VNQ_mtd_2023.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
+
+#since inception performance
+since_inception_performance = round((( df['Unrealized P&L'].sum() / df['Cost Basis'].sum() )*100),2)
 
 
 
@@ -148,11 +152,11 @@ with middle_column1:
     st.subheader("VNQ YTD:")
     st.subheader(f"{VNQ_YTD_return:,} %")
 with middle_column2:
-    st.subheader("Balance:")
-    st.subheader(f"{Account_balance:,} USD ")
+    st.subheader("since_inception_performance:")
+    st.subheader(f"{since_inception_performance:,} % ")
 with right_column:
-    st.subheader("Dividend yield:")
-    st.subheader(f"{div_yield:,} %      or      {Total_div_year:,} USD")
+    st.subheader("Unrealized:")
+    st.subheader(f"{Total_unrlzd:,} USD")
 
 st.markdown("---")
 
