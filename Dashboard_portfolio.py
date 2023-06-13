@@ -128,7 +128,7 @@ VNQ_mtd_2023 = VNQ_mtd_2023.sum()
 VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
 
 #since inception performance
-since_inception_performance = round((( df['Unrealized P&L'].sum() / df['Cost Basis'].sum() )*100),2)
+#since_inception_performance = round((( df['Unrealized P&L'].sum() / df['Cost Basis'].sum() )*100),2)
 
 
 
@@ -157,8 +157,8 @@ with middle_column1:
     st.subheader("VNQ YTD:")
     st.subheader(f"{VNQ_YTD_return:,} %")
 with middle_column2:
-    st.subheader("since_inception_performance:")
-    st.subheader(f"{since_inception_performance:,} % ")
+    st.subheader("Unrealized PnL:")
+    st.subheader(f"{Total_unrlzd:,} USD ")
 with right_column:
     st.subheader("YTD_performance:")    
     st.subheader(f"{YTD_performance:,} %")
