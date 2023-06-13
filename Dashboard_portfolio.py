@@ -98,6 +98,11 @@ Total_MV = round(df_selection['Market Value'].sum(), 1)
 Account_balance = round(((100/Total_net_liq)*Total_MV), 2)
 Total_unrlzd = round(df_selection['Unrealized P&L'].sum(), 2)
 
+#YTD portfolio perfromance
+Portfolio_YE22 = 55043.97
+deposits = 850 + 850
+YTD_performance = round((((Account_balance - deposits - Portfolio_YE22) / Portfolio_YE22) * 100),2)
+
 #Dividend calculation
 Divi = df['Dividends']
 Shares = df['Position']
@@ -155,8 +160,8 @@ with middle_column2:
     st.subheader("since_inception_performance:")
     st.subheader(f"{since_inception_performance:,} % ")
 with right_column:
-    st.subheader("Unrealized:")
-    st.subheader(f"{Total_unrlzd:,} USD")
+    st.subheader("YTD_performance:")    
+    st.subheader(f"{YTD_performance:,} %")
 
 st.markdown("---")
 
