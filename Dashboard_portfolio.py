@@ -160,7 +160,7 @@ with middle_column2:
     st.subheader("Unrealized PnL:")
     st.subheader(f"{Total_unrlzd:,} USD ")
 with right_column:
-    st.subheader("YTD_performance:")    
+    st.subheader("YTD:")    
     st.subheader(f"{YTD_performance:,} %")
 
 st.markdown("---")
