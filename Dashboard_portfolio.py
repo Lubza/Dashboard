@@ -273,6 +273,26 @@ fig_PnL_by_ticker = px.bar(
 
 col3.plotly_chart(fig_PnL_by_ticker)
 
+#df.groupby("Financial Instrument")["% of Net Liq"].sum().sort_values(ascending = False).plot.bar(figsize=(20,8))
+ticker_by_size = (
+
+df_selection.groupby(by=["Financial Instrument"]).sum()[["% of Net Liq"]].sort_values(by="% of Net Liq")
+
+)
+
+fig_ticker_by_size = px.bar(
+        ticker_by_size,
+        y = '% of Net Liq',
+        x = ticker_by_size.index,
+        orientation='v',
+        title='<b>Position by size</b>',
+        color_discrete_sequence=['#b700ae'] * len(ticker_by_size),
+        template='plotly_white'
+)
+
+col1.plotly_chart(fig_ticker_by_size)
+#
+
 st.markdown("---")
 st.title(":bar_chart: Activity log")
 
