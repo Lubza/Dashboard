@@ -24,7 +24,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0523.csv'
+adress = r'data/Portfolio_dataset_0523_new.csv'
 
 df = pd.read_csv(adress, engine='python')
 
@@ -273,7 +273,7 @@ fig_PnL_by_ticker = px.bar(
 
 col3.plotly_chart(fig_PnL_by_ticker)
 
-#df.groupby("Financial Instrument")["% of Net Liq"].sum().sort_values(ascending = False).plot.bar(figsize=(20,8))
+#Ticker by size
 ticker_by_size = (
 
 df_selection.groupby(by=["Financial Instrument"]).sum()[["% of Net Liq"]].sort_values(by="% of Net Liq")
@@ -291,6 +291,46 @@ fig_ticker_by_size = px.bar(
 )
 
 col1.plotly_chart(fig_ticker_by_size)
+#
+
+#YTD price return chart
+YtD_price_return = (
+
+df_selection.groupby(by=["Financial Instrument"]).sum()[["YtD price return"]].sort_values(by="YtD price return")
+
+)
+
+fig_YtD_price_return = px.bar(
+        YtD_price_return,
+        y = 'YtD price return',
+        x = YtD_price_return.index,
+        orientation='v',
+        title='<b>Year to date price return</b>',
+        color_discrete_sequence=['#2dbaed'] * len(YtD_price_return),
+        template='plotly_white'
+)
+
+col2.plotly_chart(fig_YtD_price_return)
+#
+
+#YTD price return chart
+MtD_price_return = (
+
+df_selection.groupby(by=["Financial Instrument"]).sum()[["MtD price return"]].sort_values(by="MtD price return")
+
+)
+
+fig_MtD_price_return = px.bar(
+        MtD_price_return,
+        y = 'MtD price return',
+        x = MtD_price_return.index,
+        orientation='v',
+        title='<b>Month to date price return</b>',
+        color_discrete_sequence=['#ed772d'] * len(MtD_price_return),
+        template='plotly_white'
+)
+
+col3.plotly_chart(fig_MtD_price_return)
 #
 
 st.markdown("---")
