@@ -286,7 +286,7 @@ fig_ticker_by_size = px.bar(
         x = ticker_by_size.index,
         orientation='v',
         title='<b>Position by size</b>',
-        color_discrete_sequence=['#b700ae'] * len(ticker_by_size),
+        color_discrete_sequence=['#f56cde'] * len(ticker_by_size),
         template='plotly_white'
 )
 
