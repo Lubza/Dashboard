@@ -339,3 +339,20 @@ st.title(":bar_chart: Activity log")
 #col4= st.columns(1)
 
 st.dataframe(df_log)
+
+st.markdown("---")
+st.title(":bar_chart: VNQ share price evolution last 5 years")
+
+#Loading stock data
+data = yf.download(tickers='VNQ', period='5y', interval='1d')
+
+#VNQ chart
+fig_VNQ = go.Figure()
+fig_VNQ.add_trace(go.Scatter(x=data.index, y=data["Close"]))
+
+#Add titles
+fig_VNQ.update_layout(yaxis_title='Stock Price (USD per Shares)')
+
+#fig_VNQ.show()
+
+st.plotly_chart(fig_VNQ)
