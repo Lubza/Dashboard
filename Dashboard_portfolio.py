@@ -24,7 +24,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0623.csv'
+adress = r'data/Portfolio_dataset_0723.csv'
 
 df = pd.read_csv(adress, engine='python')
 
@@ -89,7 +89,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of June 2023")
+st.title(":bar_chart: Portfolio Overview as of July 2023")
 st.markdown('##')
 
 #TOP KPI's
