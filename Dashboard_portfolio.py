@@ -100,7 +100,7 @@ Total_unrlzd = round(df_selection['Unrealized P&L'].sum(), 2)
 
 #YTD portfolio perfromance
 Portfolio_YE22 = 55043.97
-deposits = 850 + 850
+deposits = 850 + 850 + 4900
 YTD_performance = round((((Account_balance - deposits - Portfolio_YE22) / Portfolio_YE22) * 100),2)
 
 #Dividend calculation
