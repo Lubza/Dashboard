@@ -24,13 +24,13 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0823.csv'
+adress = r'data/Portfolio_dataset_0923.csv'
 
 df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 07312023.csv'
+adress_log = r'Activity logs/Activity log 09292023.csv'
 
 df_log = pd.read_csv(adress_log, engine='python')
 
@@ -89,7 +89,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of July 2023")
+st.title(":bar_chart: Portfolio Overview as of Sep 2023")
 st.markdown('##')
 
 #TOP KPI's
@@ -113,7 +113,7 @@ div_yield = round(((Total_div_year/Total_MV) * 100),2)
 SPY_YE_2022 = pdr.DataReader('SPY','2022-12-30','2022-12-31')['Adj Close']
 SPY_YE_2022 = SPY_YE_2022.sum()
 
-SPY_mtd_2023 = pdr.DataReader('SPY','2023-07-31','2023-08-01')['Adj Close']
+SPY_mtd_2023 = pdr.DataReader('SPY','2023-08-31','2023-09-01')['Adj Close']
 SPY_mtd_2023 = SPY_mtd_2023.sum()
 
 SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
@@ -122,7 +122,7 @@ SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
 VNQ_YE_2022 = pdr.DataReader('VNQ','2022-12-30','2022-12-31')['Adj Close']
 VNQ_YE_2022 = VNQ_YE_2022.sum()
 
-VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-07-31','2023-08-01')['Adj Close']
+VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-08-31','2023-09-01')['Adj Close']
 VNQ_mtd_2023 = VNQ_mtd_2023.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
