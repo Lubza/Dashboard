@@ -24,7 +24,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0923.csv'
+adress = r'data/Portfolio_dataset_1023.csv'
 
 df = pd.read_csv(adress, engine='python')
 
