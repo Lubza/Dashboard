@@ -30,7 +30,7 @@ df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 09292023.csv'
+adress_log = r'Activity logs/Activity log 10312023.csv'
 
 df_log = pd.read_csv(adress_log, engine='python')
 
@@ -89,7 +89,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of Sep 2023")
+st.title(":bar_chart: Portfolio Overview as of Oct 2023")
 st.markdown('##')
 
 #TOP KPI's
