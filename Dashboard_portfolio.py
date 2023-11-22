@@ -30,7 +30,7 @@ df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 10312023.csv'
+adress_log = r'Activity logs/Activity log 11192023.csv'
 
 df_log = pd.read_csv(adress_log, engine='python')
 
@@ -98,9 +98,9 @@ Total_MV = round(df_selection['Market Value'].sum(), 1)
 Account_balance = round(((100/Total_net_liq)*Total_MV), 2)
 Total_unrlzd = round(df_selection['Unrealized P&L'].sum(), 2)
 
-#YTD portfolio perfromance
+#YTD portfolio performance
 Portfolio_YE22 = 55043.97
-deposits = 850 + 850 + 4900
+deposits = 850 + 850 + 4900 + 1700
 YTD_performance = round((((Account_balance - deposits - Portfolio_YE22) / Portfolio_YE22) * 100),2)
 
 #Dividend calculation
@@ -113,7 +113,7 @@ div_yield = round(((Total_div_year/Total_MV) * 100),2)
 SPY_YE_2022 = pdr.DataReader('SPY','2022-12-30','2022-12-31')['Adj Close']
 SPY_YE_2022 = SPY_YE_2022.sum()
 
-SPY_mtd_2023 = pdr.DataReader('SPY','2023-08-31','2023-09-01')['Adj Close']
+SPY_mtd_2023 = pdr.DataReader('SPY','2023-09-29','2023-10-02')['Adj Close']
 SPY_mtd_2023 = SPY_mtd_2023.sum()
 
 SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
@@ -122,7 +122,7 @@ SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
 VNQ_YE_2022 = pdr.DataReader('VNQ','2022-12-30','2022-12-31')['Adj Close']
 VNQ_YE_2022 = VNQ_YE_2022.sum()
 
-VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-08-31','2023-09-01')['Adj Close']
+VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-09-29','2023-10-02')['Adj Close']
 VNQ_mtd_2023 = VNQ_mtd_2023.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
