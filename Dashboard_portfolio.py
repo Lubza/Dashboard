@@ -113,7 +113,7 @@ div_yield = round(((Total_div_year/Total_MV) * 100),2)
 SPY_YE_2022 = pdr.DataReader('SPY','2022-12-30','2022-12-31')['Adj Close']
 SPY_YE_2022 = SPY_YE_2022.sum()
 
-SPY_mtd_2023 = pdr.DataReader('SPY','2023-11-30','2023-12-01')['Adj Close']
+SPY_mtd_2023 = pdr.DataReader('SPY','2023-12-29','2023-12-30')['Adj Close']
 SPY_mtd_2023 = SPY_mtd_2023.sum()
 
 SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
