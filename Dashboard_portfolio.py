@@ -89,7 +89,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of Nov 2023")
+st.title(":bar_chart: Portfolio Overview as of Dec 2023")
 st.markdown('##')
 
 #TOP KPI's
@@ -122,7 +122,7 @@ SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
 VNQ_YE_2022 = pdr.DataReader('VNQ','2022-12-30','2022-12-31')['Adj Close']
 VNQ_YE_2022 = VNQ_YE_2022.sum()
 
-VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-11-30','2023-12-01')['Adj Close']
+VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
 VNQ_mtd_2023 = VNQ_mtd_2023.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
