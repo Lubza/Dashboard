@@ -24,13 +24,13 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_1223.csv'
+adress = r'data/Portfolio_dataset_0124.csv'
 
 df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 01142024.csv'
+adress_log = r'Activity logs/Activity log 02022024.csv'
 
 df_log = pd.read_csv(adress_log, engine='python')
 
@@ -89,7 +89,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of Dec 2023")
+st.title(":bar_chart: Portfolio Overview as of Jan 2024")
 st.markdown('##')
 
 #TOP KPI's
@@ -99,9 +99,9 @@ Account_balance = round(((100/Total_net_liq)*Total_MV), 2)
 Total_unrlzd = round(df_selection['Unrealized P&L'].sum(), 2)
 
 #YTD portfolio performance
-Portfolio_YE22 = 55043.97
-deposits = 10321.11
-YTD_performance = round((((Account_balance - deposits - Portfolio_YE22) / Portfolio_YE22) * 100),2)
+Portfolio_YE23 =  74849.6
+deposits = 0
+YTD_performance = round((((Account_balance - deposits - Portfolio_YE23) / Portfolio_YE23) * 100),2)
 
 #Dividend calculation
 Divi = df['Dividends']
@@ -110,22 +110,22 @@ Total_div_year = round((Divi * Shares).sum(),2)
 div_yield = round(((Total_div_year/Total_MV) * 100),2)
 
 #Calculating year-to-date price return of SPY
-SPY_YE_2022 = pdr.DataReader('SPY','2022-12-30','2022-12-31')['Adj Close']
-SPY_YE_2022 = SPY_YE_2022.sum()
+SPY_YE_2023 = pdr.DataReader('SPY','2023-12-29','2023-12-30')['Adj Close']
+SPY_YE_2023 = SPY_YE_2023.sum()
 
-SPY_mtd_2023 = pdr.DataReader('SPY','2023-12-29','2023-12-30')['Adj Close']
-SPY_mtd_2023 = SPY_mtd_2023.sum()
+SPY_mtd_2024 = pdr.DataReader('SPY','2024-01-31','2024-02-01')['Adj Close']
+SPY_mtd_2024 = SPY_mtd_2024.sum()
 
-SPY_YTD_return = round((((SPY_mtd_2023 - SPY_YE_2022) / SPY_YE_2022 ) * 100),2)
+SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
 
 #Calculating year-to-date price return of VNQ
-VNQ_YE_2022 = pdr.DataReader('VNQ','2022-12-30','2022-12-31')['Adj Close']
-VNQ_YE_2022 = VNQ_YE_2022.sum()
+VNQ_YE_2023 = pdr.DataReader('VNQ','2022-12-29','2022-12-30')['Adj Close']
+VNQ_YE_2023 = VNQ_YE_2023.sum()
 
-VNQ_mtd_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
-VNQ_mtd_2023 = VNQ_mtd_2023.sum()
+VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-01-31','2024-01-31')['Adj Close']
+VNQ_mtd_2024 = VNQ_mtd_2024.sum()
 
-VNQ_YTD_return = round((((VNQ_mtd_2023 - VNQ_YE_2022) / VNQ_YE_2022 ) * 100),2)
+VNQ_YTD_return = round((((VNQ_mtd_2024 - VNQ_YE_2023) / VNQ_YE_2023 ) * 100),2)
 
 #since inception performance
 #since_inception_performance = round((( df['Unrealized P&L'].sum() / df['Cost Basis'].sum() )*100),2)
