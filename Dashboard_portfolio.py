@@ -37,7 +37,7 @@ df_log = pd.read_csv(adress_log, engine='python')
 #del df_log['Unnamed: 7']
 #del df_log['Unnamed: 8']
 
-#df_log['Price adj'] = df_log["Price"].str.replace("$","")
+df_log['Price adj'] = df_log["Price"].str.replace("$","")
 df_log['Price adj'] = df_log['Price adj'].astype(float)
 df_log['Amount'] = df_log['Price adj'] * df_log['Qty']
 
