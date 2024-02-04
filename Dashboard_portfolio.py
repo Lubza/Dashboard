@@ -122,7 +122,7 @@ SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
 VNQ_YE_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
 VNQ_YE_2023 = VNQ_YE_2023.sum()
 
-VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-01-31','2024-01-31')['Adj Close']
+VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-01-31','2024-02-01')['Adj Close']
 VNQ_mtd_2024 = VNQ_mtd_2024.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2024 - VNQ_YE_2023) / VNQ_YE_2023 ) * 100),2)
