@@ -119,7 +119,7 @@ SPY_mtd_2024 = SPY_mtd_2024.sum()
 SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
 
 #Calculating year-to-date price return of VNQ
-VNQ_YE_2023 = pdr.DataReader('VNQ','2022-12-29','2022-12-30')['Adj Close']
+VNQ_YE_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
 VNQ_YE_2023 = VNQ_YE_2023.sum()
 
 VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-01-31','2024-01-31')['Adj Close']
