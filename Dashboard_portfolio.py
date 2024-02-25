@@ -50,6 +50,7 @@ del df_log['Date adj']
 
 
 #---- SIDEBAR -----
+st.sidebar.title('Navigation') # novy riadok pre multipage testing
 st.sidebar.header("Please Filter Here:")
 
 PSize = st.sidebar.multiselect(
