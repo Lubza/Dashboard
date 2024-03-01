@@ -1,7 +1,7 @@
 from pandas_datareader import data as pdr
 from datetime import datetime
 import numpy as np # linear algebra
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import yfinance as yf
 #Data viz
 import plotly.graph_objs as go
