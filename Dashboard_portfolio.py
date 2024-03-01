@@ -1,5 +1,7 @@
 from pandas_datareader import data as pdr
 from datetime import datetime
+import numpy as np # linear algebra
+import matplotlib.pyplot as plt
 import yfinance as yf
 #Data viz
 import plotly.graph_objs as go
@@ -8,12 +10,6 @@ yf.pdr_override()
 import pandas as pd
 import plotly.express as px
 import streamlit as st
-
-#@st.cache
-#def get_data():
-    #df = pd.read_csv(r'data\Portfolio_dataset_0423.csv)
-
-    #return df
 
 #emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
 
@@ -24,29 +20,88 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0124.csv'
+adress = r'data/Portfolio_dataset_0224.csv'
 
 df = pd.read_csv(adress, engine='python')
 
 #df = get_data()
 
-adress_log = r'Activity logs/Activity log 02022024.csv'
+### 1. Activity log ###
 
-df_log = pd.read_csv(adress_log, engine='python')
+adress_log = r'Activity logs/Activity log 02292024.csv'
 
-#del df_log['Unnamed: 7']
-#del df_log['Unnamed: 8']
+log = pd.read_csv(adress_log, engine='python')
 
-#df_log['Price adj'] = df_log["Price"].str.replace("$","")
-df_log['Price adj'] = df_log['Price'].astype(float)
-df_log['Amount'] = df_log['Price adj'] * df_log['Qty']
+    # DataFrame
+data = log['Date']
+log_date = pd.DataFrame(data)
 
-df_log['Date adj'] = pd.to_datetime(df_log['Date'])
+    # Define function to convert date format
+def convert_date(date_str):
+        original_date = pd.to_datetime(date_str, format='%m/%d/%Y')
+        return original_date.strftime('%Y-%m-%d')
 
-df_log['Year'] = df_log['Date adj'].dt.year 
-df_log['Month'] = df_log['Date adj'].dt.month
+    # Apply function to DataFrame column
+log['Date_converted'] = log_date['Date'].apply(convert_date)
+log['Amount'] = log['Price'] * log['Qty']
 
-del df_log['Date adj']
+### 1.1 Pozicie ###
+#### 1.1.1. all pozicie
+pozicie = pd.pivot_table(log,
+                         values=['Qty', 'Amount'],
+                         index=['Ticker'],
+                         #columns=['Date'],
+                         aggfunc="sum").fillna(0)
+pozicie = pozicie.reset_index(drop=False)
+log = log.reset_index(drop=False)
+
+#### 1.1.2 select pozicie
+Tickers = ['VOD'] # input for ticker
+bot = ['BOT'] # bought
+sld = ['SLD'] # sold
+   
+# selecting rows based on condition 
+#Select_pozicie = pozicie[pozicie['Ticker'].isin(Tickers)]
+
+Select_ticker = log[log['Ticker'].isin(Tickers)]
+
+Select_ticker_bot = Select_ticker[Select_ticker['Action'].isin(bot)]
+Select_ticker_sld = Select_ticker[Select_ticker['Action'].isin(sld)]
+
+init_costbase_pozicie = Select_ticker_bot.drop(['index'], axis=1) # calculate initial cost_base of selected position 
+init_costbase_pozicie_sum = init_costbase_pozicie['Amount'].sum()
+
+sold_pozicie = Select_ticker_sld.drop(['index'], axis=1) # calculate sold position in $
+sold_pozicie_sum = sold_pozicie['Amount'].sum()
+
+sum_select_ticker = Select_ticker['Amount'].sum() # calculate sum sold and bought selected position
+
+if sum_select_ticker > 0:                         # ak je suma predanych a nakupenych kladna tak toto je nova cost base a ak je zaporna tak je to realized
+   current_costbase_ticker = sum_select_ticker
+else:
+   realized_ticker = sum_select_ticker * -1
+
+#### 1.1.3 all closed positions 
+Closed_positions_df = pozicie[pozicie['Qty'] == 0]
+closed_positions_sum = Closed_positions_df['Amount'].sum()
+
+#### 1.1.4 all live positions
+zive_pozicie_df = pozicie[pozicie['Qty'] != 0]
+
+#### 1.1.5. all option positions
+mask = (pozicie['Ticker'].str.len() > 6) & (pozicie['Ticker'] != 'NET.UN VENTURE')
+pozicie_opcie_df = pozicie.loc[mask]
+
+##### 1.1.5.1. Live option positions
+live_positions_options_df = pozicie_opcie_df[pozicie_opcie_df['Qty'] != 0]
+
+##### 1.1.5.2. closed option positions
+closed_positions_options_df = pozicie_opcie_df[pozicie_opcie_df['Qty'] == 0]
+
+#### 1.1.6. all stock positions
+mask = (pozicie['Ticker'].str.len() < 7) & (pozicie['Ticker'] != 'NET.UN VENTURE')
+pozicie_akcie_df = pozicie.loc[mask]
+
 
 
 #---- SIDEBAR -----
@@ -90,7 +145,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of Jan 2024")
+st.title(":bar_chart: Portfolio Overview as of Feb 2024")
 st.markdown('##')
 
 #TOP KPI's
@@ -114,7 +169,7 @@ div_yield = round(((Total_div_year/Total_MV) * 100),2)
 SPY_YE_2023 = pdr.DataReader('SPY','2023-12-29','2023-12-30')['Adj Close']
 SPY_YE_2023 = SPY_YE_2023.sum()
 
-SPY_mtd_2024 = pdr.DataReader('SPY','2024-01-31','2024-02-01')['Adj Close']
+SPY_mtd_2024 = pdr.DataReader('SPY','2024-02-29','2024-03-01')['Adj Close']
 SPY_mtd_2024 = SPY_mtd_2024.sum()
 
 SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
@@ -123,13 +178,17 @@ SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
 VNQ_YE_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
 VNQ_YE_2023 = VNQ_YE_2023.sum()
 
-VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-01-31','2024-02-01')['Adj Close']
+VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-02-29','2024-03-01')['Adj Close']
 VNQ_mtd_2024 = VNQ_mtd_2024.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2024 - VNQ_YE_2023) / VNQ_YE_2023 ) * 100),2)
 
 #since inception performance
 #since_inception_performance = round((( df['Unrealized P&L'].sum() / df['Cost Basis'].sum() )*100),2)
+
+### new feature - trades
+
+
 
 
 
@@ -339,7 +398,7 @@ st.title(":bar_chart: Activity log")
 
 #col4= st.columns(1)
 
-st.dataframe(df_log)
+st.dataframe(log)
 
 st.markdown("---")
 st.title(":bar_chart: VNQ share price evolution last 5 years")
