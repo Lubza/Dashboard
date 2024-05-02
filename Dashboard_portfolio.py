@@ -20,7 +20,7 @@ st.set_page_config(page_title="Portfolio overview",
 
 #adress = r'C:\Users\Lubos\Dropbox\My PC (Lubos-PC1)\Desktop\python\data\Portfolio_dataset_1122.csv'
 #adress = r'https://raw.githubusercontent.com/Lubza/My-overview-app/master/Portfolio_dataset_1122.csv'
-adress = r'data/Portfolio_dataset_0224.csv'
+adress = r'data/Portfolio_dataset_0424.csv'
 
 df = pd.read_csv(adress, engine='python')
 
@@ -145,7 +145,7 @@ df_selection = df.query(
 
 
 #-----MAINPAGE-----
-st.title(":bar_chart: Portfolio Overview as of Feb 2024")
+st.title(":bar_chart: Portfolio Overview as of April 2024")
 st.markdown('##')
 
 #TOP KPI's
@@ -178,7 +178,7 @@ SPY_YTD_return = round((((SPY_mtd_2024 - SPY_YE_2023) / SPY_YE_2023 ) * 100),2)
 VNQ_YE_2023 = pdr.DataReader('VNQ','2023-12-29','2023-12-30')['Adj Close']
 VNQ_YE_2023 = VNQ_YE_2023.sum()
 
-VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-02-29','2024-03-01')['Adj Close']
+VNQ_mtd_2024 = pdr.DataReader('VNQ','2024-03-28','2024-04-01')['Adj Close']
 VNQ_mtd_2024 = VNQ_mtd_2024.sum()
 
 VNQ_YTD_return = round((((VNQ_mtd_2024 - VNQ_YE_2023) / VNQ_YE_2023 ) * 100),2)
